@@ -1,0 +1,27 @@
+-1 Crear imagen a partir del docker file que esta en C:\dockerdata\imagenes\docker
+
+1-poner a correr un docker a partir de una imagen creada en el paso anterior de con la cli de cocker intalada.
+docker run -p 8080:8080 -p 50000:50000 -d --name jenkin --privileged -v jenkins_home:/var/jenkins_home -v //var/run/docker.sock:/var/run/docker.sock jenkin
+
+ver como puedo incluir esto en la imagen de jenkins
+docker exec -it -u root jenkin bash
+groupadd -f docker
+usermod -aG docker $USER
+newgrp docker
+chmod 777 /var/run/docker.sock
+
+
+
+**********************
+
+
+
+
+groupadd -f docker
+usermod -aG docker $USER
+
+
+chown root:docker /var/run/docker.sock
+chown -R "$USER":"$USER" $HOME/.docker
+chmod -R g+rw "$HOME/.docker"
+chmod 777 /var/run/docker.sock
