@@ -1,0 +1,19 @@
+up container
+
+create image 
+set position in a folder that contain docker file for jenkins and cli
+- cd C:\dockerdata\imagenes\Docker
+
+create image: docker build -t jenkin-final .
+
+
+//Se crea el container
+docker run -p 8080:8080 -p 50000:50000 -d --name jenkin --privileged -v jenkins_home:/var/jenkins_home -v //var/run/docker.sock:/var/run/docker.sock jenkin-final
+
+
+o se crea con el docker-compose up -d 
+
+docker exec -u root jenkin /bin/sh -c "groupadd -f docker;newgrp docker;chmod 777 /var/run/docker.sock"
+
+se le dan los permisos
+docker exec -u root jenkin /bin/sh -c "groupadd -f docker;usermod -aG docker $USER;newgrp docker;chmod 777 /var/run/docker.sock"
